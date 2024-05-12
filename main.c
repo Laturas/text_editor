@@ -1,26 +1,5 @@
-/*
- * Copyright (c) 2014 University of Michigan, Ann Arbor.
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms are permitted
- * provided that the above copyright notice and this paragraph are
- * duplicated in all such forms and that any documentation,
- * advertising materials, and other materials related to such
- * distribution and use acknowledge that the software was developed
- * by the University of Michigan, Ann Arbor. The name of the University 
- * may not be used to endorse or promote products derived from this 
- * software without specific prior written permission.
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
- * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
- * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- *
- * Author: Sugih Jamin
-*/
-#include <stdio.h>
-#include <stdlib.h>
-
-//#define GLFW_DLL
 #include <GLFW/glfw3.h>
+#include <stdlib.h>
 
 #define NENDS 2           /* number of end "points" to draw */
 
@@ -32,9 +11,7 @@ int fbwidth, fbheight;    /* framebuffer width and height (Retina display) */
 GLfloat ends[NENDS][2];   /* array of 2D points */
 
 /* function where all the actual drawing happens */
-void
-disp()
-{
+void disp() {
   int i;
 
   /* color buffer must be cleared each time */
@@ -55,9 +32,7 @@ disp()
 
 /* Callback functions for GLFW */
 
-void
-init_data()
-{
+void init_data() {
   /* initialize line's end points to be fractions of window dimensions */
   ends[0][0] = (float) 0.25*fbwidth;  /* (0,0) is the lower left corner */
   ends[0][1] = (float) 0.75*fbheight;
@@ -73,9 +48,7 @@ init_data()
  * NOT called automatically when window is first created.
  * Called by GLFW BEFORE reshape().
 */
-void
-fbreshape(GLFWwindow *wd, int w, int h)
-{
+void fbreshape(GLFWwindow *wd, int w, int h) {
   /* save new framebuffer dimensions */
   fbwidth = w;
   fbheight = h;
@@ -101,9 +74,7 @@ fbreshape(GLFWwindow *wd, int w, int h)
  * NOT called automatically when window is first created.
  * Called by GLFW AFTER fbreshape().
 */
-void
-reshape(GLFWwindow *wd, int w, int h)
-{
+void reshape(GLFWwindow *wd, int w, int h) {
   /* save new screen dimensions */
   width = w;
   height = h;
@@ -113,17 +84,13 @@ reshape(GLFWwindow *wd, int w, int h)
 
 /* Called when window is closed,
    also when 'q' or ESC is hit. */
-void
-quit(GLFWwindow *wd)
-{
+void quit(GLFWwindow *wd) {
   glfwDestroyWindow(wd);
   glfwTerminate();
   exit(0);
 }
 
-void
-kbd(GLFWwindow* wd, int key, int scancode, int action, int mods)
-{
+void kbd(GLFWwindow* wd, int key, int scancode, int action, int mods) {
   if (action == GLFW_RELEASE) { // function is called first on GLFW_PRESS.
     return;
   }
@@ -152,18 +119,11 @@ charhd(GLFWwindow* wd, unsigned int key)
 
   return;
 }
-
-void
-err(int errcode, const char* desc)
-{
-  fprintf(stderr, "%d: %s\n", errcode, desc);
-
+void err(int errcode, const char* desc) {
+  // Ignore it like a real chad
   return;
 }
-
-void
-initgl()
-{ 
+void initgl() { 
   /* clear color buffer to white */
   glClearColor(1.0, 1.0, 1.0, 0.0);
   
@@ -178,9 +138,7 @@ initgl()
   return;
 }
 
-int
-main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
   glfwSetErrorCallback(err);
   if (!glfwInit()) {
     exit(1);
